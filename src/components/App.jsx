@@ -4,7 +4,7 @@
  * @author Abdelmawla Souat <abdelmawla.souat@gmail.com>
  *
  * Created at     : 2020-12-26 10:48:01
- * Last modified  : 2020-12-26 20:12:59
+ * Last modified  : 2020-12-26 21:17:14
  */
 
 import {
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 	},
 	patternBg: {
 		width: '100%',
-		height: '25vh',
+		height: '38vh',
 	},
 	title: {
 		color: 'white',
@@ -59,7 +59,7 @@ function App() {
 					<Grid item xs={10} sm={5}>
 						<IpTrackerField placeholder="Search for any IP address or domain" />
 					</Grid>
-					<Grid item>
+					<Grid item xs={10}>
 						<IPAdressData />
 					</Grid>
 				</Grid>
