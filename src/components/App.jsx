@@ -4,7 +4,7 @@
  * @author Abdelmawla Souat <abdelmawla.souat@gmail.com>
  *
  * Created at     : 2020-12-26 10:48:01
- * Last modified  : 2020-12-26 21:17:14
+ * Last modified  : 2020-12-28 10:17:27
  */
 
 import {
@@ -14,10 +14,13 @@ import {
 	makeStyles,
 	Grid,
 } from '@material-ui/core'
+
 import theme from '../theme'
-import IPAdressData from './IPAdressData'
-import IpTrackerField from './IPTrackerField'
 import patternBg from '../images/pattern-bg.png'
+
+import IPAdressData from './IPAdressData'
+import Map from './Map'
+import IpTrackerField from './IPTrackerField'
 
 const useStyles = makeStyles({
 	ipAddressTracker: {
@@ -39,11 +42,15 @@ function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<Box className="App">
+				{/* Pattern Bg */}
 				<img
 					className={classes.patternBg}
 					src={patternBg}
 					alt="Pattern Background"
 				/>
+				{/* Map */}
+				<Map />
+				{/* IP ADDRESS TRACKER */}
 				<Grid
 					container
 					className={classes.ipAddressTracker}
