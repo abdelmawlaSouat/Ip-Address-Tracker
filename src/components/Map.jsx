@@ -4,7 +4,7 @@
  * @author Abdelmawla Souat <abdelmawla.souat@gmail.com>
  *
  * Created at     : 2020-12-28 09:47:22
- * Last modified  : 2020-12-28 14:21:23
+ * Last modified  : 2020-12-28 14:57:16
  */
 
 import { useState, useEffect } from 'react'
@@ -18,7 +18,7 @@ mapboxgl.accessToken =
 const useStyles = makeStyles({
 	mapContainer: {
 		width: '100%',
-		height: '60vh',
+		height: '100%',
 	},
 })
 
@@ -46,7 +46,8 @@ function Map() {
 				z: map.getZoom().toFixed(2),
 			})
 		})
-	}, [mapContainer, x, y, z])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<Box
