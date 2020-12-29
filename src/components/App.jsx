@@ -4,7 +4,7 @@
  * @author Abdelmawla Souat <abdelmawla.souat@gmail.com>
  *
  * Created at     : 2020-12-26 10:48:01
- * Last modified  : 2020-12-29 19:56:34
+ * Last modified  : 2020-12-29 21:14:57
  */
 
 import { useState, useEffect } from 'react'
@@ -40,7 +40,9 @@ function App() {
         setTimeZone(loc.timezone)
         setIpAddress(ip)
         setIsp(ispValue)
+        setZoom(16)
       })
+      // eslint-disable-next-line no-console
       .catch((err) => console.log(err))
   }
 
@@ -51,6 +53,7 @@ function App() {
           .get('https://geoip-db.com/json/')
           .then((response) => response.data.IPv4)
           .then((ipAddr) => getLocationData(ipAddr))
+          // eslint-disable-next-line no-console
           .catch((err) => console.log(err))
       })
     }
