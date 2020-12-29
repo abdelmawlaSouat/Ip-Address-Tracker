@@ -4,7 +4,7 @@
  * @author Abdelmawla Souat <abdelmawla.souat@gmail.com>
  *
  * Created at     : 2020-12-26 10:48:01
- * Last modified  : 2020-12-29 17:47:49
+ * Last modified  : 2020-12-29 19:56:34
  */
 
 import { useState, useEffect } from 'react'
@@ -20,7 +20,7 @@ const API_KEY = process.env.REACT_APP_IPIFY_KEY
 
 function App() {
   const [position, setPosition] = useState({ x: 0, y: 0 })
-  const [ipAddress, setIpAddress] = useState('')
+  const [ipAddress, setIpAddress] = useState('Unknown')
   const [isp, setIsp] = useState('Unknown')
   const [timezone, setTimeZone] = useState('Unknown')
   const [zoom, setZoom] = useState(1)
@@ -59,10 +59,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Box className="App" style={{ height: '100vh' }}>
-        {`${position.x} - ${position.y} $$$ ip : ${ipAddress}  $`}
-        {`isp: ${isp}`}
         <PatternBackground src={patternBg} />
         <IPAddressContainer
+          updateLocalisation={(ip) => getLocationData(ip)}
           ipAddress={ipAddress}
           location={location}
           timezone={timezone}

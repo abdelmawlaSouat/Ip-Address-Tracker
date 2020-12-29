@@ -5,7 +5,7 @@
  * @author Abdelmawla Souat <abdelmawla.souat@gmail.com>
  *
  * Created at     : 2020-12-28 14:42:04
- * Last modified  : 2020-12-29 18:00:31
+ * Last modified  : 2020-12-29 19:59:11
  */
 
 import { Typography, makeStyles, Grid } from '@material-ui/core'
@@ -28,7 +28,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function IPAddressContainer({ ipAddress, location, timezone, isp }) {
+function IPAddressContainer({
+  ipAddress,
+  location,
+  timezone,
+  isp,
+  updateLocalisation,
+}) {
   const classes = useStyles()
 
   return (
@@ -45,7 +51,11 @@ function IPAddressContainer({ ipAddress, location, timezone, isp }) {
         </Typography>
       </Grid>
       <Grid item xs={10} sm={5}>
-        <IpTrackerField placeholder="Search for any IP address or domain" />
+        <IpTrackerField
+          placeholder="Search for any IP address or domain"
+          ipAddress={ipAddress}
+          updateLocalisation={updateLocalisation}
+        />
       </Grid>
       <Grid item xs={10}>
         <IPAdressData
@@ -60,9 +70,10 @@ function IPAddressContainer({ ipAddress, location, timezone, isp }) {
 }
 
 IPAddressContainer.propTypes = {
-  ipAddress: PropTypes.number.isRequired,
-  isp: PropTypes.number.isRequired,
-  timezone: PropTypes.number.isRequired,
+  updateLocalisation: PropTypes.func.isRequired,
+  ipAddress: PropTypes.string.isRequired,
+  isp: PropTypes.string.isRequired,
+  timezone: PropTypes.string.isRequired,
   location: PropTypes.shape({
     city: PropTypes.string,
     postalCode: PropTypes.string,
