@@ -5,10 +5,11 @@
  * @author Abdelmawla Souat <abdelmawla.souat@gmail.com>
  *
  * Created at     : 2020-12-28 14:42:04
- * Last modified  : 2020-12-29 17:48:43
+ * Last modified  : 2020-12-29 18:00:31
  */
 
 import { Typography, makeStyles, Grid } from '@material-ui/core'
+import PropTypes from 'prop-types'
 
 import IPAdressData from './IPAdressData'
 import IpTrackerField from './IPTrackerField'
@@ -56,6 +57,16 @@ function IPAddressContainer({ ipAddress, location, timezone, isp }) {
       </Grid>
     </Grid>
   )
+}
+
+IPAddressContainer.propTypes = {
+  ipAddress: PropTypes.number.isRequired,
+  isp: PropTypes.number.isRequired,
+  timezone: PropTypes.number.isRequired,
+  location: PropTypes.shape({
+    city: PropTypes.string,
+    postalCode: PropTypes.string,
+  }).isRequired,
 }
 
 export default IPAddressContainer

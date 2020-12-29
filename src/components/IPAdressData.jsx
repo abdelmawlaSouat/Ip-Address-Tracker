@@ -4,10 +4,11 @@
  * @author Abdelmawla Souat <abdelmawla.souat@gmail.com>
  *
  * Created at     : 2020-12-26 12:15:55
- * Last modified  : 2020-12-29 17:51:58
+ * Last modified  : 2020-12-29 18:01:07
  */
 
 import { Box, Card, Typography, makeStyles } from '@material-ui/core'
+import PropTypes from 'prop-types'
 import clsx from 'clsx'
 
 const useStyles = makeStyles((theme) => ({
@@ -77,4 +78,15 @@ function IPAdressData({ ipAddress, location, timezone, isp }) {
     </Card>
   )
 }
+
+IPAdressData.propTypes = {
+  ipAddress: PropTypes.number.isRequired,
+  isp: PropTypes.number.isRequired,
+  timezone: PropTypes.number.isRequired,
+  location: PropTypes.shape({
+    city: PropTypes.string,
+    postalCode: PropTypes.string,
+  }).isRequired,
+}
+
 export default IPAdressData
