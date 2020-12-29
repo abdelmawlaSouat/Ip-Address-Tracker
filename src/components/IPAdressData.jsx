@@ -4,7 +4,7 @@
  * @author Abdelmawla Souat <abdelmawla.souat@gmail.com>
  *
  * Created at     : 2020-12-26 12:15:55
- * Last modified  : 2020-12-29 18:01:07
+ * Last modified  : 2020-12-29 19:07:30
  */
 
 import { Box, Card, Typography, makeStyles } from '@material-ui/core'
@@ -61,13 +61,17 @@ function IPAdressData({ ipAddress, location, timezone, isp }) {
         <Box className={clsx(classes.borderLeft, classes.item)}>
           <Typography className={classes.categorie}>LOCATION</Typography>
           <Typography className={classes.data}>
-            {`${location.city}, ${location.postalCode}`}
+            {location.city !== 'Unknown' || location.postalCode !== 'Unknown'
+              ? `${location.city}, ${location.postalCode}`
+              : 'Unknown'}
           </Typography>
         </Box>
 
         <Box className={clsx(classes.borderLeft, classes.item)}>
           <Typography className={classes.categorie}>TIMEZONE</Typography>
-          <Typography className={classes.data}>{`UTC ${timezone}`}</Typography>
+          <Typography className={classes.data}>
+            {timezone !== 'Unknown' ? `UTC ${timezone}` : timezone}
+          </Typography>
         </Box>
 
         <Box className={clsx(classes.borderLeft, classes.item)}>
@@ -80,9 +84,9 @@ function IPAdressData({ ipAddress, location, timezone, isp }) {
 }
 
 IPAdressData.propTypes = {
-  ipAddress: PropTypes.number.isRequired,
-  isp: PropTypes.number.isRequired,
-  timezone: PropTypes.number.isRequired,
+  ipAddress: PropTypes.string.isRequired,
+  isp: PropTypes.string.isRequired,
+  timezone: PropTypes.string.isRequired,
   location: PropTypes.shape({
     city: PropTypes.string,
     postalCode: PropTypes.string,
