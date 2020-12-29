@@ -5,14 +5,16 @@
  * @author Abdelmawla Souat <abdelmawla.souat@gmail.com>
  *
  * Created at     : 2020-12-26 12:08:36
- * Last modified  : 2020-12-29 19:58:03
+ * Last modified  : 2020-12-29 21:01:28
  */
 
 import { useState, useEffect } from 'react'
 import { Box, Button, InputBase, makeStyles } from '@material-ui/core'
+import clsx from 'clsx'
 import PropTypes from 'prop-types'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import isIp from 'is-ip'
+import swal from 'sweetalert'
 
 const useStyles = makeStyles((theme) => ({
   box: {
@@ -38,21 +40,26 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '15px',
     },
   },
-  icon: {
-    color: 'white',
-  },
+  invalid: { color: 'red' },
+  icon: { color: 'white' },
 }))
 
 function IpTrackerField({ ipAddress, placeholder, updateLocalisation }) {
   const [inputValue, setInputValue] = useState('')
+  const [isValid, setIsValid] = useState(true)
   const classes = useStyles()
 
   function updateIpAddress(value) {
     if (isIp(value)) {
-      console.log(value)
+      setIsValid(true)
       updateLocalisation(value)
     } else {
-      console.log('Fuck !')
+      setIsValid(false)
+      swal({
+        title: 'Address IP invalid !',
+        text: 'Please check the field.',
+        icon: 'error',
+      })
     }
   }
 
@@ -61,7 +68,7 @@ function IpTrackerField({ ipAddress, placeholder, updateLocalisation }) {
   return (
     <Box className={classes.box} display="flex">
       <InputBase
-        className={classes.input}
+        className={clsx(classes.input, !isValid ? classes.invalid : '')}
         placeholder={placeholder}
         onChange={(e) => setInputValue(e.target.value)}
         value={inputValue !== 'Unknown' ? inputValue : ''}
