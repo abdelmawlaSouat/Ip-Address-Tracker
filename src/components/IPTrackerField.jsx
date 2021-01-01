@@ -71,6 +71,9 @@ function IpTrackerField({ ipAddress, placeholder, updateLocalisation }) {
         className={clsx(classes.input, !isValid ? classes.invalid : '')}
         placeholder={placeholder}
         onChange={(e) => setInputValue(e.target.value)}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') updateIpAddress(inputValue.trim())
+        }}
         value={inputValue !== 'Unknown' ? inputValue : ''}
       />
       <Button

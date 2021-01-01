@@ -10,7 +10,6 @@
 
 import { Typography, makeStyles, Grid } from '@material-ui/core'
 import PropTypes from 'prop-types'
-
 import IPAdressData from './IPAdressData'
 import IpTrackerField from './IPTrackerField'
 
@@ -19,13 +18,9 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     zIndex: '9999',
     top: '5vh',
-    [theme.breakpoints.only('xs')]: {
-      top: '1vh',
-    },
+    [theme.breakpoints.only('xs')]: { top: '1vh' },
   },
-  title: {
-    color: 'white',
-  },
+  title: { color: 'white' },
 }))
 
 function IPAddressContainer({
