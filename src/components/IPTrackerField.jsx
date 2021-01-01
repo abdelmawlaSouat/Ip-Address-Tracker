@@ -9,7 +9,7 @@
  */
 
 import { useState, useEffect } from 'react'
-import { Box, Button, InputBase, makeStyles } from '@material-ui/core'
+import { Box, Button, Grid, InputBase, makeStyles } from '@material-ui/core'
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '15px',
     width: '100vh',
     [theme.breakpoints.only('xs')]: {
-      fontSize: '15px',
+      fontSize: '12px',
     },
   },
   invalid: { color: 'red' },
@@ -66,23 +66,27 @@ function IpTrackerField({ ipAddress, placeholder, updateLocalisation }) {
   useEffect(() => setInputValue(ipAddress), [ipAddress])
 
   return (
-    <Box className={classes.box} display="flex">
-      <InputBase
-        className={clsx(classes.input, !isValid ? classes.invalid : '')}
-        placeholder={placeholder}
-        onChange={(e) => setInputValue(e.target.value)}
-        onKeyPress={(e) => {
-          if (e.key === 'Enter') updateIpAddress(inputValue.trim())
-        }}
-        value={inputValue !== 'Unknown' ? inputValue : ''}
-      />
-      <Button
-        className={classes.btn}
-        onClick={() => updateIpAddress(inputValue.trim())}
-      >
-        <NavigateNextIcon className={classes.icon} />
-      </Button>
-    </Box>
+    <Grid container justify="center">
+      <Grid item xs={10} sm={5}>
+        <Box className={classes.box} display="flex">
+          <InputBase
+            className={clsx(classes.input, !isValid ? classes.invalid : '')}
+            placeholder={placeholder}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') updateIpAddress(inputValue.trim())
+            }}
+            value={inputValue !== 'Unknown' ? inputValue : ''}
+          />
+          <Button
+            className={classes.btn}
+            onClick={() => updateIpAddress(inputValue.trim())}
+          >
+            <NavigateNextIcon className={classes.icon} />
+          </Button>
+        </Box>
+      </Grid>
+    </Grid>
   )
 }
 

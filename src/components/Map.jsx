@@ -32,7 +32,7 @@ function Map({ position, zoom, handlePosition, handleZoom }) {
     const map = new mapboxgl.Map({
       container: mapContainer,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [position.x, position.y],
+      center: [position.x, position.y + 0.009],
       zoom,
     })
     if ((position.x && position.y) !== 0) {

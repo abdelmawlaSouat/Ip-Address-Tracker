@@ -7,7 +7,7 @@
  * Last modified  : 2020-12-29 19:07:30
  */
 
-import { Box, Card, Typography, makeStyles } from '@material-ui/core'
+import { Grid, Box, Card, Typography, makeStyles } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   ipAddressDataBox: {
     display: 'flex',
     padding: '1rem',
-    [theme.breakpoints.only('xs')]: {
+    [theme.breakpoints.down('xs')]: {
       flexDirection: 'column',
       padding: '0',
     },
@@ -24,8 +24,13 @@ const useStyles = makeStyles((theme) => ({
   item: {
     margin: '2.7rem',
     paddingLeft: '2.2rem',
+    [theme.breakpoints.down('md')]: {
+      margin: '1rem',
+      paddingLeft: '1rem',
+      fontSize: '1rem',
+    },
     [theme.breakpoints.only('xs')]: {
-      margin: '1rem 1.5rem',
+      margin: '0.3rem 1.5rem',
       paddingLeft: '0',
       textAlign: 'center',
     },
@@ -43,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   data: {
     fontSize: '2rem',
     fontWeight: 'bold',
-    [theme.breakpoints.only('xs')]: { fontSize: '1.5rem' },
+    [theme.breakpoints.down('md')]: { fontSize: '1.5rem' },
   },
 }))
 
@@ -51,35 +56,40 @@ function IPAdressData({ ipAddress, location, timezone, isp }) {
   const classes = useStyles()
 
   return (
-    <Card className={classes.ipAddressDataCard}>
-      <Box className={classes.ipAddressDataBox}>
-        <Box className={classes.item}>
-          <Typography className={classes.categorie}>IP ADDRESS</Typography>
-          <Typography className={classes.data}>{ipAddress}</Typography>
-        </Box>
+    <Grid container justify="center">
+      <Grid item xs={10} sm={11} md={8} lg={7}>
+        <Card className={classes.ipAddressDataCard}>
+          <Box className={classes.ipAddressDataBox} justifyContent="center">
+            <Box className={classes.item}>
+              <Typography className={classes.categorie}>IP ADDRESS</Typography>
+              <Typography className={classes.data}>{ipAddress}</Typography>
+            </Box>
 
-        <Box className={clsx(classes.borderLeft, classes.item)}>
-          <Typography className={classes.categorie}>LOCATION</Typography>
-          <Typography className={classes.data}>
-            {location.city !== 'Unknown' || location.postalCode !== 'Unknown'
-              ? `${location.city}, ${location.postalCode}`
-              : 'Unknown'}
-          </Typography>
-        </Box>
+            <Box className={clsx(classes.borderLeft, classes.item)}>
+              <Typography className={classes.categorie}>LOCATION</Typography>
+              <Typography className={classes.data}>
+                {location.city !== 'Unknown' ||
+                location.postalCode !== 'Unknown'
+                  ? `${location.city}, ${location.postalCode}`
+                  : 'Unknown'}
+              </Typography>
+            </Box>
 
-        <Box className={clsx(classes.borderLeft, classes.item)}>
-          <Typography className={classes.categorie}>TIMEZONE</Typography>
-          <Typography className={classes.data}>
-            {timezone !== 'Unknown' ? `UTC ${timezone}` : timezone}
-          </Typography>
-        </Box>
+            <Box className={clsx(classes.borderLeft, classes.item)}>
+              <Typography className={classes.categorie}>TIMEZONE</Typography>
+              <Typography className={classes.data}>
+                {timezone !== 'Unknown' ? `UTC ${timezone}` : timezone}
+              </Typography>
+            </Box>
 
-        <Box className={clsx(classes.borderLeft, classes.item)}>
-          <Typography className={classes.categorie}>ISP</Typography>
-          <Typography className={classes.data}>{isp}</Typography>
-        </Box>
-      </Box>
-    </Card>
+            <Box className={clsx(classes.borderLeft, classes.item)}>
+              <Typography className={classes.categorie}>ISP</Typography>
+              <Typography className={classes.data}>{isp}</Typography>
+            </Box>
+          </Box>
+        </Card>
+      </Grid>
+    </Grid>
   )
 }
 

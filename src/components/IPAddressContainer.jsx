@@ -17,10 +17,16 @@ const useStyles = makeStyles((theme) => ({
   ipAddressTracker: {
     position: 'absolute',
     zIndex: '9999',
+    textAlign: 'center',
     top: '5vh',
     [theme.breakpoints.only('xs')]: { top: '1vh' },
   },
-  title: { color: 'white' },
+  title: {
+    color: 'white',
+    [theme.breakpoints.only('xs')]: {
+      fontSize: '2rem',
+    },
+  },
 }))
 
 function IPAddressContainer({
@@ -38,21 +44,20 @@ function IPAddressContainer({
       className={classes.ipAddressTracker}
       direction="column"
       spacing={5}
-      alignItems="center"
     >
       <Grid item>
         <Typography className={classes.title} variant="h4">
           IP Address Tracker
         </Typography>
       </Grid>
-      <Grid item xs={10} sm={5}>
+      <Grid item xs={12}>
         <IpTrackerField
           placeholder="Search for any IP address or domain"
           ipAddress={ipAddress}
           updateLocalisation={updateLocalisation}
         />
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={12}>
         <IPAdressData
           ipAddress={ipAddress}
           location={location}
