@@ -8,7 +8,7 @@
  */
 
 import { useState, useEffect } from 'react'
-import { Box, ThemeProvider } from '@material-ui/core'
+import { Box, ThemeProvider, CircularProgress } from '@material-ui/core'
 import axios from 'axios'
 import theme from '../theme'
 import patternBg from '../images/pattern-bg.png'
@@ -19,6 +19,7 @@ import Map from './Map'
 const API_KEY = process.env.REACT_APP_IPIFY_KEY
 
 function App() {
+  const [loading, setLoading] = useState(false)
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [ipAddress, setIpAddress] = useState('Unknown')
   const [isp, setIsp] = useState('Unknown')
@@ -30,6 +31,7 @@ function App() {
   })
 
   function getLocationData(ipAddr) {
+    setLoading(true)
     axios
       .get(`https://geo.ipify.org/api/v1?apiKey=${API_KEY}&ipAddress=${ipAddr}`)
       .then((response) => {
@@ -40,7 +42,8 @@ function App() {
         setTimeZone(loc.timezone)
         setIpAddress(ip)
         setIsp(ispValue)
-        setZoom(16)
+        setZoom(13)
+        setLoading(false)
       })
       // eslint-disable-next-line no-console
       .catch((err) => console.log(err))
@@ -49,9 +52,10 @@ function App() {
   useEffect(() => {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(() => {
+        setLoading(true)
         axios
           .get('https://geoip-db.com/json/')
-          .then((response) => response.data.IPv4)
+          .then((response) => response.data.IPv4 || response.data.IPv6)
           .then((ipAddr) => getLocationData(ipAddr))
           // eslint-disable-next-line no-console
           .catch((err) => console.log(err))
@@ -61,22 +65,34 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box className="App" style={{ height: '100vh' }}>
-        <PatternBackground src={patternBg} />
-        <IPAddressContainer
-          updateLocalisation={(ip) => getLocationData(ip)}
-          ipAddress={ipAddress}
-          location={location}
-          timezone={timezone}
-          isp={isp}
-        />
-        <Map
-          position={position}
-          handlePosition={() => setPosition(position)}
-          handleZoom={() => setZoom(zoom)}
-          zoom={zoom}
-        />
-      </Box>
+      {loading ? (
+        <Box
+          className="Loader-container"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          style={{ height: '100vh' }}
+        >
+          <CircularProgress className="Loader" />
+        </Box>
+      ) : (
+        <Box className="App" style={{ height: '100vh' }}>
+          <PatternBackground src={patternBg} />
+          <IPAddressContainer
+            updateLocalisation={(ip) => getLocationData(ip)}
+            ipAddress={ipAddress}
+            location={location}
+            timezone={timezone}
+            isp={isp}
+          />
+          <Map
+            position={position}
+            handlePosition={() => setPosition(position)}
+            handleZoom={() => setZoom(zoom)}
+            zoom={zoom}
+          />
+        </Box>
+      )}
     </ThemeProvider>
   )
 }
