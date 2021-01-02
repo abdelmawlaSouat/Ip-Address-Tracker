@@ -4,7 +4,7 @@
  * @author Abdelmawla Souat <abdelmawla.souat@gmail.com>
  *
  * Created at     : 2020-12-26 12:15:55
- * Last modified  : 2020-12-29 19:07:30
+ * Last modified  : 2021-01-02 17:12:33
  */
 
 import { Grid, Box, Card, Typography, makeStyles } from '@material-ui/core'
@@ -46,9 +46,8 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
   },
   data: {
-    fontSize: '2rem',
+    fontSize: '1.5rem',
     fontWeight: 'bold',
-    [theme.breakpoints.down('md')]: { fontSize: '1.5rem' },
   },
 }))
 
@@ -57,7 +56,7 @@ function IPAdressData({ ipAddress, location, timezone, isp }) {
 
   return (
     <Grid container justify="center">
-      <Grid item xs={10} sm={11} md={8} lg={7}>
+      <Grid item xs={10} sm={11} md={8}>
         <Card className={classes.ipAddressDataCard}>
           <Box className={classes.ipAddressDataBox} justifyContent="center">
             <Box className={classes.item}>
