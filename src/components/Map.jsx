@@ -4,7 +4,7 @@
  * @author Abdelmawla Souat <abdelmawla.souat@gmail.com>
  *
  * Created at     : 2020-12-28 09:47:22
- * Last modified  : 2020-12-29 22:03:05
+ * Last modified  : 2021-01-02 16:56:14
  */
 
 import { useEffect } from 'react'
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 })
 
-function Map({ position, zoom, handlePosition, handleZoom }) {
+function Map({ position, zoom }) {
   const classes = useStyles()
 
   useEffect(() => {
@@ -35,11 +35,12 @@ function Map({ position, zoom, handlePosition, handleZoom }) {
       center: [position.x, position.y + 0.009],
       zoom,
     })
+
     if ((position.x && position.y) !== 0) {
       const style = { color: 'black', scale: 1.3 }
       new mapboxgl.Marker(style).setLngLat([position.x, position.y]).addTo(map)
     }
-  }, [handlePosition, handleZoom, position.x, position.y, zoom])
+  }, [position.x, position.y, zoom])
 
   return (
     <Box
@@ -57,8 +58,6 @@ Map.propTypes = {
     y: PropTypes.number,
   }).isRequired,
   zoom: PropTypes.number.isRequired,
-  handlePosition: PropTypes.func.isRequired,
-  handleZoom: PropTypes.func.isRequired,
 }
 
 export default Map

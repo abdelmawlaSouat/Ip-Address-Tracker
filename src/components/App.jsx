@@ -4,7 +4,7 @@
  * @author Abdelmawla Souat <abdelmawla.souat@gmail.com>
  *
  * Created at     : 2020-12-26 10:48:01
- * Last modified  : 2020-12-29 21:14:57
+ * Last modified  : 2021-01-02 16:55:23
  */
 
 import { useState, useEffect } from 'react'
@@ -85,12 +85,7 @@ function App() {
             timezone={timezone}
             isp={isp}
           />
-          <Map
-            position={position}
-            handlePosition={() => setPosition(position)}
-            handleZoom={() => setZoom(zoom)}
-            zoom={zoom}
-          />
+          <Map position={position} zoom={zoom} />
         </Box>
       )}
     </ThemeProvider>
