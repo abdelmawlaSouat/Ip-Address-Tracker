@@ -24,7 +24,7 @@ function App() {
   const [ipAddress, setIpAddress] = useState('Unknown')
   const [isp, setIsp] = useState('Unknown')
   const [timezone, setTimeZone] = useState('Unknown')
-  const [zoom, setZoom] = useState(1)
+  const [zoom, setZoom] = useState(1.85)
   const [location, setLocation] = useState({
     city: 'Unknown',
     postalCode: 'Unknown',
